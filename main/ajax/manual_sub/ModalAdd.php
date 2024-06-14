@@ -31,7 +31,7 @@ $manual_id = $_GET['manual_id'];
                 <input type="file" class="form-control mb-3" id="file_name" name="file_name">
             </div>
 
-            <div class="col-6">
+            <div class="col-12">
                 <label for="link_manual">
                     ลิงค์วิดีโอ
                 </label>

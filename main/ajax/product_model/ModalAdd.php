@@ -1,6 +1,6 @@
 <?php
 
-include("../../../config/main_function.php");
+include ("../../../config/main_function.php");
 
 $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 $brand_id = mysqli_real_escape_string($connect_db, $_POST['brand_id']);
@@ -31,7 +31,14 @@ $brand_id = mysqli_real_escape_string($connect_db, $_POST['brand_id']);
                 </label>
                 <input type="text" class="form-control mb-3" id="model_name" name="model_name">
             </div>
+            <div class="col-12">
+                <label for="upload_file">
+                    รูปรุ่น
+                </label>
+                <input type="file" id="file_name" name="file_name" class="form-control">
+            </div>
         </div>
+    </div>
 
     </div>
 
@@ -44,3 +51,6 @@ $brand_id = mysqli_real_escape_string($connect_db, $_POST['brand_id']);
         <button type="button" class="btn btn-primary btn-sm" onclick="Add();">บันทึก</button>
     </div>
 </form>
+<script>
+
+</script>

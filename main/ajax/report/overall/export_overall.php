@@ -1054,7 +1054,7 @@ foreach ($work_list as $row) {
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells($columnCharacter[7] . $rowCell . ':' . $columnCharacter[7] . ($rowCell));
 
     //  วันที่เปิดงาน
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue($columnCharacter[8] . $rowCell, ($row['create_datetime'] == "") ? "-" : date("d/m/Y", strtotime($row['create_datetime'])));
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue($columnCharacter[8] . $rowCell, ($row['create_datetime'] == "") ? "-" : date("d/m/Y H:i", strtotime($row['create_datetime'])));
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells($columnCharacter[8] . $rowCell . ':' . $columnCharacter[8] . ($rowCell));
 
     //วันที่นัดหมาย

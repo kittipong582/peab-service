@@ -34,6 +34,7 @@ for ($i; $i <= $plan_times; $i++) {
 ?>
 
     <div class="row mb-3 new_pm_multi_form">
+
         <input type="hidden" readonly id="branch_care_id_<?php echo $i ?>" value="<?php echo $check_branch ?>" name="branch_care_id[]" class="form-control branch_care_id">
         <input type="hidden" id="row" name="row" value="<?php echo $i ?>">
         <input type="hidden" id="date" name="date" value="<?php echo $date ?>">

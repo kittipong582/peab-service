@@ -113,7 +113,7 @@ $rowCell = 2;
 
 while ($row = mysqli_fetch_array($res)) {
 
-    $sql_score = "SELECT COUNT(rec.score) AS total_score , SUM(rec.score) AS aws_score ,form.audit_name
+    echo $sql_score = "SELECT COUNT(rec.score) AS total_score , SUM(rec.score) AS aws_score ,form.audit_name
     FROM tbl_audit_record rec
     LEFT JOIN tbl_job_audit job ON rec.job_id = job.job_id
     LEFT JOIN tbl_audit_form form ON job.audit_id = form.audit_id
@@ -148,10 +148,10 @@ $excelSheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
 $excelSheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
 $excelSheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
 
-$filename = "รายงาน Audit วันที่ " . date("d-m-y", strtotime($start_date)) . " - " . date("d-m-y", strtotime($end_date)) . ".xlsx";
-$writer = new Xlsx($excelSheet);
-$writer = IOFactory::createWriter($excelSheet, 'Xlsx');
-$callStartTime = microtime(true);
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="' . $filename . '"');
-$writer->save('php://output');
+// $filename = "รายงาน Audit วันที่ " . date("d-m-y", strtotime($start_date)) . " - " . date("d-m-y", strtotime($end_date)) . ".xlsx";
+// $writer = new Xlsx($excelSheet);
+// $writer = IOFactory::createWriter($excelSheet, 'Xlsx');
+// $callStartTime = microtime(true);
+// header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+// header('Content-Disposition: attachment; filename="' . $filename . '"');
+// $writer->save('php://output');

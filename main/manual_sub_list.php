@@ -1,5 +1,5 @@
-<?php include('header.php');
-include("../../config/main_function.php");
+<?php include ('header.php');
+include ("../../config/main_function.php");
 $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 $manual_id = $_GET['id'];
 $sql_head = "SELECT * FROM tbl_manual WHERE  manual_id = '$manual_id'";
@@ -53,7 +53,8 @@ $row_head = mysqli_fetch_assoc($rs_head);
 
             <div class="ibox-tools">
 
-                <input class="btn btn-xs btn-info btn-block" data-width="70%" type="button" onclick="ModalAdd();" value="เพิ่มคู่มือ">
+                <input class="btn btn-xs btn-info btn-block" data-width="70%" type="button" onclick="ModalAdd();"
+                    value="เพิ่มคู่มือ">
             </div>
         </div>
         <div id="Loading">
@@ -80,9 +81,9 @@ $row_head = mysqli_fetch_assoc($rs_head);
     </div>
 </div>
 
-<?php include('import_script.php'); ?>
+<?php include ('import_script.php'); ?>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         GetTable();
         $('#Loading').hide();
         $(".select2").select2({
@@ -108,7 +109,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
             data: {
                 manual_id: manual_id
             },
-            success: function(response) {
+            success: function (response) {
                 $("#show_data").html(response);
                 $('table').DataTable({
                     pageLength: 50,
@@ -132,7 +133,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
                 manual_id: manual_id
             },
             dataType: "html",
-            success: function(response) {
+            success: function (response) {
                 $("#modal .modal-content").html(response);
                 $("#modal").modal('show');
             }
@@ -149,7 +150,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
                 manual_sub_id: manual_sub_id
             },
             dataType: "html",
-            success: function(response) {
+            success: function (response) {
                 $("#modal .modal-content").html(response);
                 $("#modal").modal('show');
                 $('.summernote').summernote({
@@ -161,9 +162,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
     }
 
 
-    function Changestatus(branch_id)
-
-    {
+    function Changestatus(branch_id) {
 
         $.ajax({
 
@@ -179,7 +178,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
 
             dataType: 'json',
 
-            success: function(data) {
+            success: function (data) {
                 if (data.result == 1) {
                     GetTable();
                 }
@@ -211,7 +210,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
             cancelButtonText: 'ยกเลิก',
             confirmButtonText: 'ยืนยัน',
             closeOnConfirm: false
-        }, function() {
+        }, function () {
 
             $.ajax({
                 type: 'POST',
@@ -220,7 +219,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
                 processData: false,
                 contentType: false,
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     if (data.result == 0) {
                         swal({
                             title: 'ผิดพลาด!',
@@ -269,7 +268,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
             cancelButtonText: 'ยกเลิก',
             confirmButtonText: 'ยืนยัน',
             closeOnConfirm: false
-        }, function() {
+        }, function () {
 
             $.ajax({
                 type: 'POST',
@@ -278,7 +277,7 @@ $row_head = mysqli_fetch_assoc($rs_head);
                 processData: false,
                 contentType: false,
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     if (data.result == 0) {
                         swal({
                             title: 'ผิดพลาด!',
@@ -302,5 +301,109 @@ $row_head = mysqli_fetch_assoc($rs_head);
                 }
             })
         });
+    }
+
+    function Delete_file(manual_sub_id) {
+        swal({
+            title: 'กรุณายืนยันเพื่อทำรายการ',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'ยกเลิก',
+            confirmButtonText: 'ยืนยัน',
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: "POST",
+                url: "ajax/manual_sub/Delete_file.php",
+                data: {
+                    manual_sub_id: manual_sub_id
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 1) {
+                        swal({
+                            title: 'ลบข้อมูลสำเร็จ',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }, function () {
+                            GetTable()
+                            swal.close();
+                            $("#modal").modal('hide');
+                        });
+                    } else if (data.result == 0) {
+                        swal({
+                            title: 'แจ้งเตือน',
+                            text: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+                            type: 'warning',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else if (data.result == 9) {
+                        swal({
+                            title: 'แจ้งเตือน',
+                            text: 'ไม่สามารถติดต่อเซิฟเวอร์ได้ กรุณาลองใหม่อีกครั้ง',
+                            type: 'warning',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        })
+    }
+
+    function Delete_Vdo(manual_sub_id) {
+        swal({
+            title: 'กรุณายืนยันเพื่อทำรายการ',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'ยกเลิก',
+            confirmButtonText: 'ยืนยัน',
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: "POST",
+                url: "ajax/manual_sub/Delete_Vdo.php",
+                data: {
+                    manual_sub_id: manual_sub_id
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 1) {
+                        swal({
+                            title: 'ลบข้อมูลสำเร็จ',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }, function () {
+                            GetTable()
+                            swal.close();
+                            $("#modal").modal('hide');
+                        });
+                    } else if (data.result == 0) {
+                        swal({
+                            title: 'แจ้งเตือน',
+                            text: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+                            type: 'warning',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else if (data.result == 9) {
+                        swal({
+                            title: 'แจ้งเตือน',
+                            text: 'ไม่สามารถติดต่อเซิฟเวอร์ได้ กรุณาลองใหม่อีกครั้ง',
+                            type: 'warning',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        })
     }
 </script>

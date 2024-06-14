@@ -4,6 +4,11 @@ include ("../../config/main_function.php");
 $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 
 $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
+$qc_id = mysqli_real_escape_string($connect_db, $_GET['qc_id']);
+
+$sql = "SELECT * FROM table WHERE column";
+$res = mysqli_query($connection, $sql);
+$row = mysqli_fetch_assoc($res);
 
 ?>
 
@@ -35,6 +40,7 @@ $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox">
+                    <input type="hidden" name="qc_id" id="qc_id" value="<?php echo $qc_id ?>">
                     <div class="ibox-title" style="padding: 15px 15px 8px 15px;">
                         <div class="col-lg-12">
                             <!-- <div class="row" style="margin-left: 8px;"> -->
@@ -116,8 +122,6 @@ $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
             const urlParams = new URLSearchParams(queryString);
             const topic_qc_id = urlParams.get('topic_qc_id');
 
-            console.log(topic_qc_id);
-
 
             $.ajax({
                 type: 'POST',
@@ -147,14 +151,15 @@ $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
         // }
 
         function GetModalChoiceAddList(topic_qc_id) {
-            console.log(topic_qc_id)
+            var qc_id = $('#qc_id').val();
 
             $.ajax({
                 type: "POST",
                 url: "ajax/qc_choice/modal_addlist.php",
                 dataType: "html",
                 data: {
-                    topic_qc_id: topic_qc_id
+                    topic_qc_id: topic_qc_id,
+                    qc_id: qc_id
                 },
                 success: function (response) {
                     $("#myModal .modal-content").html(response);
@@ -169,7 +174,7 @@ $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
 
 
         function SubmitAddChoiceList() {
-            
+
             let checklist_name = $("#checklist_name").val();
             if (checklist_name == "") {
                 swal({
@@ -188,7 +193,7 @@ $topic_qc_id = mysqli_real_escape_string($connect_db, $_GET['topic_qc_id']);
 
             let formData = new FormData($("#frm_choice_add")[0]);
             formData.append('topic_qc_id', '<?php echo $topic_qc_id ?>');
-           
+
 
             $.ajax({
                 type: "POST",

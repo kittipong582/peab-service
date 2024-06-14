@@ -109,8 +109,8 @@ if ($staff != "x") {
 
 switch ($type_date) {
     case "1":
-        $condition .= " AND a.create_datetime BETWEEN '$start_date 00:00:00' AND  '$end_date 23:59:59'";
-        $condition2 .= " AND a.group_date BETWEEN '$start_date 00:00:00' AND  '$end_date 23:59:59'";
+        $condition .= " AND a.start_service_time BETWEEN '$start_date 00:00:00' AND  '$end_date 23:59:59'";
+        $condition2 .= " AND a.start_service_time BETWEEN '$start_date 00:00:00' AND  '$end_date 23:59:59'";
         break;
     case "2":
         $condition .= " AND a.create_datetime BETWEEN '$start_date 00:00:00' AND  '$end_date 23:59:59'";
@@ -138,11 +138,15 @@ $work_list = array();
     LEFT JOIN tbl_product_model j ON h.model_id = j.model_id
     LEFT JOIN tbl_product_type l ON h.product_type = l.type_id
 
-    WHERE a.job_id NOT in(select job_id from tbl_group_pm_detail) AND a.cancel_datetime IS NULL $condition 
+    WHERE a.cancel_datetime IS NULL $condition 
     ORDER BY a.job_no DESC
     ;";
+
+// WHERE a.job_id NOT in(select job_id from tbl_group_pm_detail) AND a.cancel_datetime IS NULL $condition 
 // echo $sql;
 $rs  = mysqli_query($connection, $sql);
+$num = mysqli_num_rows($rs);
+// echo$num_rows = mysqli_num_rows($rs);
 while ($row = mysqli_fetch_array($rs)) {
     $array_product = array();
     $total_income = 0;

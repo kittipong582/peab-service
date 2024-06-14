@@ -84,6 +84,8 @@
 <script src="../template/js/plugins/jasny/jasny-bootstrap.min.js"></script>
 
 <script src="../template/js/plugins/dropzone/dropzone.js"></script>
+<!-- Color picker -->
+<script src="../template/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
 
 <!-- <script src="../template/js/jquery-3.1.1.min.js"></script>

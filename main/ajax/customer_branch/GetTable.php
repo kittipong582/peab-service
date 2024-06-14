@@ -28,7 +28,7 @@ if (!empty($name_branch)) {
         $sql = "SELECT a.*,b.*,(a.branch_name) AS cus_branch_name,a.district_id as dis_id,c.customer_name,c.customer_code  FROM tbl_customer_branch a 
 LEFT JOIN tbl_branch b ON b.branch_id = a.branch_care_id 
 LEFT JOIN tbl_customer c ON a.customer_id = c.customer_id
-WHERE a.active_status = 1  $condition_name  order by b.branch_name";
+WHERE 1  $condition_name  order by b.branch_name";
         $result  = mysqli_query($connect_db, $sql);
     } else {
 

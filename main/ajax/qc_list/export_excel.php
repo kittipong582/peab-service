@@ -347,8 +347,12 @@ $columnCharacter = array(
 $columnHeaderName = array(
     "วันที่",
     "เครื่อง",
+    "S/N",
+    "สถานะเครื่อง",
     "ช่าง",
-    "สถานะ"
+    "สถานะ",
+    "หมายเหตุ",
+    "สถานะงาน"
 );
 
 $num_header = count($columnHeaderName);
@@ -377,7 +381,7 @@ $res = mysqli_query($connection, $sql);
 
 while ($row = mysqli_fetch_assoc($res)) {
 
-   
+
     $status = $row['start_qc'];
 
     if ($row['start_qc'] == '') {
@@ -399,12 +403,40 @@ while ($row = mysqli_fetch_assoc($res)) {
     $res_staff = mysqli_query($connection, $sql_staff);
     $row_staff = mysqli_fetch_assoc($res_staff);
 
-  
+    $sql_sn = "SELECT * FROM tbl_product_qc a
+    LEFT JOIN tbl_machine_status b ON a.machine_status  = b.status_value 
+     WHERE a.job_qc_id = '{$row['job_qc_id']}'";
+    $res_sn = mysqli_query($connection, $sql_sn) or die($connection->error);
+    $row_sn = mysqli_fetch_assoc($res_sn);
+
+    $sql_p_all = "SELECT COUNT(CASE WHEN a.score = 1 THEN 1 END) AS pass ,COUNT(CASE WHEN a.score = 0 THEN 1 END) AS fail FROM tbl_qc_record a 
+                                                            LEFT JOIN tbl_qc_checklist b ON a.checklist_id = b.checklist_id
+                                                            LEFT JOIN tbl_qc_topic c ON b.topic_qc_id =c.topic_qc_id 
+                                                            WHERE a.job_qc_id = '{$row['job_qc_id']}'";
+    $res_p_all = mysqli_query($connection, $sql_p_all);
+    $row_p_all = mysqli_fetch_assoc($res_p_all);
+
+
+    $status_machine = $row_p_all['fail'];
+
+    if ($row_p_all['fail'] == '0') {
+        $status_machine = 'ผ่าน';
+    } elseif ($row_p_all['fail'] != '0') {
+        $status_machine = 'ไม่ผ่าน';
+    } else {
+        $status_machine = '';
+    }
+
 
     $objPHPExcel->getActiveSheet()->setCellValue("A" . $rowCell, $row['appointment_date']);
     $objPHPExcel->getActiveSheet()->setCellValue("B" . $rowCell, $row_product['model_code'] . '-' . $row_product['model_name']);
-    $objPHPExcel->getActiveSheet()->setCellValue("C" . $rowCell, $row_staff['fullname']);
-    $objPHPExcel->getActiveSheet()->setCellValue("D" . $rowCell, $status);
+    $objPHPExcel->getActiveSheet()->setCellValue("C" . $rowCell, $row_sn['series_no']);
+    $objPHPExcel->getActiveSheet()->setCellValue("D" . $rowCell, $row_sn['status_name']);
+    $objPHPExcel->getActiveSheet()->setCellValue("E" . $rowCell, $row_staff['fullname']);
+    $objPHPExcel->getActiveSheet()->setCellValue("F" . $rowCell, $status);
+    $objPHPExcel->getActiveSheet()->setCellValue("G" . $rowCell, $row['remark']);
+    $objPHPExcel->getActiveSheet()->setCellValue("H" . $rowCell, $status_machine);
+
     // $objPHPExcel->getActiveSheet()->setCellValue("E" . $rowCell, $ct_name);
     // $objPHPExcel->getActiveSheet()->setCellValue("F" . $rowCell, $register_level);
     // $objPHPExcel->getActiveSheet()->setCellValue("G" . $rowCell, $register_type);
@@ -417,7 +449,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     // $objPHPExcel->getActiveSheet()->setCellValue("N" . $rowCell, $row_member['company_name']);
     // $objPHPExcel->getActiveSheet()->setCellValue("O" . $rowCell, $row_member['company_phone']);
 
-    $objPHPExcel->getActiveSheet()->getStyle("A" . $rowCell . ':' . "D" . $rowCell)->applyFromArray($styleTextCenter);
+    $objPHPExcel->getActiveSheet()->getStyle("A" . $rowCell . ':' . "H" . $rowCell)->applyFromArray($styleTextCenter);
 
     $rowCell++;
 }

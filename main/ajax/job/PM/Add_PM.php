@@ -154,12 +154,16 @@ for ($a = 1; $a < $i; $a++) {
         $rs_contact  = mysqli_query($connect_db, $insert_contact);
     }
 
+
+
+
     $branch_care_id = $temp_array_u[$a]['branch_care_id'];
     $responsible_user_id = $temp_array_u[$a]['responsible_user_id'];
     $PMhours = $temp_array_u[$a]['PMhours'];
     $PMminutes = $temp_array_u[$a]['PMminutes'];
     $PMhoure = $temp_array_u[$a]['PMhoure'];
     $PMminutee = $temp_array_u[$a]['PMminutee'];
+
 
     $sql_update = "UPDATE tbl_job 
         SET     appointment_date = '$appointment_date'

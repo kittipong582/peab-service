@@ -3,7 +3,9 @@
     .classmodal1 {
         max-width: 1000px;
         margin: auto;
+        
     }
+   
 </style>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -56,7 +58,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="Modal"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content animated fadeIn">
             <div id="showModal"></div>
@@ -220,6 +222,7 @@
             success: function (response) {
                 $("#modal .modal-content").html(response);
                 $("#modal").modal('show');
+                $(".select2").select2();
             }
         });
 

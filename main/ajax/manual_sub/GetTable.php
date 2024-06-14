@@ -1,12 +1,12 @@
 <?php
-include("../../../config/main_function.php");
+include ("../../../config/main_function.php");
 
 $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 
 $manual_id = $_POST['manual_id'];
 
 $sql = "SELECT * FROM tbl_manual_sub WHERE manual_id = '$manual_id' and active_status = 1 ORDER BY list_order ASC";
-$result  = mysqli_query($connect_db, $sql); {
+$result = mysqli_query($connect_db, $sql); {
 
     $temp_array = array(
         "manual_sub_id" => $row['manual_sub_id'],
@@ -34,7 +34,7 @@ $result  = mysqli_query($connect_db, $sql); {
         <?php
         $i = 0;
         while ($row = mysqli_fetch_array($result)) {
-        ?>
+            ?>
             <tr>
                 <td><?php echo ++$i; ?></td>
 
@@ -44,17 +44,23 @@ $result  = mysqli_query($connect_db, $sql); {
 
                 <td>
                     <?php if ($row['file_name'] != "") {
-                    ?>
-                        <a target="_blank" href="https://peabery-upload.s3.ap-southeast-1.amazonaws.com/<?php echo $row['file_name']; ?>" class='btn btn-xs'><button class='btn btn-xs btn-primary'><i class='fa fa-file'></i></button></a>
+                        ?>
+                        <a target="_blank"
+                            href="https://peabery-upload.s3.ap-southeast-1.amazonaws.com/<?php echo $row['file_name']; ?>"
+                            class='btn btn-xs'><button class='btn btn-xs btn-primary'><i class='fa fa-file'></i></button></a>
+                        <button class="btn btn-xs btn-danger" onclick="Delete_file('<?php echo $row['manual_sub_id'] ?>')">ลบ</button>
                     <?php } ?>
                     <?php if ($row['link_manual'] != "") {
-                    ?>
-                        <a target="_blank" href="<?php echo $row['link_manual']; ?>" class='btn btn-xs'><button class='btn btn-xs btn-danger'><i class='fa fa-file-video-o'></i></button></a>
+                        ?>
+                        <a target="_blank" href="<?php echo $row['link_manual']; ?>" class='btn btn-xs'><button
+                                class='btn btn-xs btn-danger'><i class='fa fa-file-video-o'></i></button></a>
+                        <button class="btn btn-xs btn-danger"onclick="Delete_Vdo('<?php echo $row['manual_sub_id'] ?>')">ลบ</button>
                     <?php } ?>
                 </td>
 
                 <td>
-                    <button class="btn btn-xs btn-warning btn-block" type="button" onclick="ModalEdit('<?php echo $row['manual_sub_id']; ?>')">
+                    <button class="btn btn-xs btn-warning btn-block" type="button"
+                        onclick="ModalEdit('<?php echo $row['manual_sub_id']; ?>')">
                         แก้ไขข้อมูล
                     </button>
                 </td>

@@ -136,11 +136,19 @@ if ($type == 1) {
 if ($num_check != 1) {
     include('logout.php');
 } else {
+
+
+
     // echo $sql_spare;
+
     // $sql_s_spare = "SELECT IFNULL(SUM(quantity),0) AS sum_spare FROM tbl_job_spare_used WHERE job_id = '$job_id'";
     // $result_s_spare  = mysqli_query($connection, $sql_s_spare);
     // $row_s_spare = mysqli_fetch_array($result_s_spare);
     // echo $sql_s_spare;
+
+
+
+
     // var_dump($job_array);
 ?>
     <style>
@@ -254,6 +262,7 @@ if ($num_check != 1) {
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="tabs-container2" style="margin-top: 2ex;">
@@ -266,23 +275,30 @@ if ($num_check != 1) {
                                 } else {
                                     $active = '';
                                 }
+                                // echo $job_id;
                             ?>
                                 <input type="hidden" id="get<?php echo $i ?>" value="<?php echo $job_id['job_id'] ?>">
-                                <li>
-                                    <a class="nav-link tab_head1 <?php echo $active ?>" id="tabs_head_<?php echo $i ?>" onclick="load_Getdata('<?php echo $job_id['job_id'] ?>');" href="#tabs-<?php echo $i ?>" data-toggle="tab">
+                                <li><a class="nav-link tab_head1 <?php echo $active ?>" id="tabs_head_<?php echo $i ?>" onclick="load_Getdata('<?php echo $job_id['job_id'] ?>');" href="#tabs-<?php echo $i ?>" data-toggle="tab">
                                         <?php echo $job_id['job_no'] ?>
-                                    </a>
-                                </li>
+                                    </a></li>
                             <?php
                             } ?>
+
                         </ul>
                         <input type="hidden" id="type" name="type" value="<?php echo $type ?>">
                         <div class="tab-content2">
                             <div id="point_data">
+
                             </div>
+
                         </div>
+
+
+
+
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -350,9 +366,12 @@ if ($num_check != 1) {
                 //     });
                 // });
 
+
             });
 
+
             function load_Getdata(job_id) {
+
                 $.ajax({
                     type: 'POST',
                     url: 'ajax/CM_view/Getdata.php',
@@ -366,9 +385,15 @@ if ($num_check != 1) {
                         load_table_total_service();
                     }
                 });
+
+
+
+
             }
 
+
             function all_load() {
+
                 load_table_expend();
                 load_table_total_service();
                 load_table_job_payment();

@@ -24,6 +24,7 @@ $result  = mysqli_query($connect_db, $sql); {
                 <th style="width:10%;">#</th>
                 <th style="width:40%;">รหัสรุ่น</th>
                 <th style="width:40%;">ชื่อรุ่น</th>
+                <th style="width:40%;">รูปรุ่น</th>
                 <th style="width:10%;"></th>
             </tr>
         </thead>
@@ -36,6 +37,9 @@ $result  = mysqli_query($connect_db, $sql); {
                     <td><?php echo ++$i; ?></td>
                     <td><?php echo $row['model_code']; ?></td>
                     <td><?php echo $row['model_name']; ?></td>
+                    <td>
+                    <img id="" src="<?php echo ($row['file_name'] != '')? 'https://peabery-upload.s3.ap-southeast-1.amazonaws.com/' . $row['file_name'] : 'upload/No-Image.png' ?>" width="100%" />
+                    </td>
                     <td>
                         <a href="Product_model_manual.php?id=<?php echo $row['model_id']; ?>" class="btn btn-xs btn-block btn-success">รายละเอียด</a>
                         <button class="btn btn-xs btn-block <?php echo ($row['active_status'] == 1) ? 'btn-info' : 'btn-danger'; ?>" onclick="ChangeStatus(this,'<?php echo $row['brand_id']; ?>')">

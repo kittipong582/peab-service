@@ -32,7 +32,7 @@ $job_qc_id = getRandomID2(10, 'tbl_job_qc', 'job_qc_id');
                                     รหัสสินค้า :
                                     <?php echo $row_product['model_code'] ?>
                                     <input type="text" hidden name="model_code" id="model_code" value="<?php echo $row_product['model_code'] ?>">
-                                    <input type="text" hidden name="product_type" id="product_type" value="<?php echo $row_product['product_type'] ?>">
+                                    <input type="text" hidden  name="product_type" id="product_type" value="<?php echo $row_product['product_type'] ?>">
                                 </h3>
                                 <h3>
                                     ชื่อสินค้า :

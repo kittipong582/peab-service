@@ -25,13 +25,14 @@ $res_area = mysqli_query($connect_db, $sql_area) or die($connection->error);
                 <select name="area_id" id="area_id" style="width: 100%;" class="form-control select2 mb-3 ">
                     <option value="">กรุณาเลือก</option>
                     <?php while ($row_area = mysqli_fetch_assoc($res_area)) { ?>
-                        <option value="<?php echo $row_area['area_id'] ?>"<?php echo ($row_area['area_id'] == $row ['area_id'] ? "selected" : ""); ?>>
+
+                        <option value="<?php echo $row_area['area_id'] ?>" <?php echo ($row_area['area_id'] == $row['area_id'] ? "selected" : ""); ?>>
                             <?php echo $row_area['area_name'] ?>
                         </option>
                     <?php } ?>
                 </select>
             </div>
-
+            <input type="text" hidden id="o_area_id" name="o_area_id" value="<?php echo $row['area_id'] ?>">
         </div>
     </form>
 </div>

@@ -94,6 +94,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     );
     $num_header = count($columnHeaderName);
     $c = 0;
+
     for ($i = 0; $i < $num_header; $i++) {
         $excelSheet->getActiveSheet()->setCellValue($columnCharacter[$c] . $rowCell, $columnHeaderName[$c]);
         $excelSheet->getActiveSheet()->getColumnDimension($columnCharacter[$c])->setAutoSize(TRUE);
@@ -101,8 +102,10 @@ while ($row = mysqli_fetch_assoc($res)) {
     }
 
     $num_sheet++;
+    
     $sheet->setTitle($row["branch_code"]);
 
+    
     // $rowCell = 1;
     // $columnCharacter = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
     // $columnHeaderName = array(

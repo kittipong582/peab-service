@@ -138,7 +138,15 @@ $res_qc_id = mysqli_query($connect_db, $sql_qc_id);
                                 ?>
                                 <tfoot>
                                     <tr>
-                                        <td></td>
+                                        <?php
+
+                                        $sql_remark = "SELECT remark FROM tbl_job_qc WHERE job_qc_id = '$job'";
+                                        $res_remark = mysqli_query($connection, $sql_remark) or die($connection->error);
+                                        $row_remark = mysqli_fetch_assoc($res_remark); ?>
+                                        <td>
+                                            <label>หมายเหตุ : </label>
+                                            <?php echo $row_remark['remark'] ?>
+                                        </td>
                                         <td colspan="2">
                                             สรุปผล :
                                             <?php
@@ -192,6 +200,7 @@ $res_qc_id = mysqli_query($connect_db, $sql_qc_id);
         $("#myModal").modal("show");
         $("#showModal").load("ajax/qc_work_detail/modal_image.php", {
             record_id: record_id
+          
         });
     }
 </script>

@@ -597,7 +597,7 @@ while ($row = mysqli_fetch_array($rs)) {
 
 
 
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue($columnCharacter[0] . $rowCell, date("d-m-Y", strtotime($row['job_create_date'])));
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue($columnCharacter[0] . $rowCell, date("d-m-Y H:i", strtotime($row['job_create_date'])));
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells($columnCharacter[0] . $rowCell . ':' . $columnCharacter[0] . ($rowCell));
 
 

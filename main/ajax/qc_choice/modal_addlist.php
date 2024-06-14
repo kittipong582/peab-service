@@ -5,6 +5,7 @@ $connection = connectDB("LM=VjfQ{6rsm&/h`");
 
 $checklist_id = getRandomID2(10, 'tbl_qc_checklist', 'checklist_id');
 $topic_qc_id = mysqli_real_escape_string($connection, $_POST['topic_qc_id']);
+$qc_id = mysqli_real_escape_string($connection, $_POST['qc_id']);
 ?>
 <div class="modal-header">
     <h4 class="modal-title">เพิ่มรายการตรวจเช็ค</h4>
@@ -15,6 +16,7 @@ $topic_qc_id = mysqli_real_escape_string($connection, $_POST['topic_qc_id']);
     <form id="frm_choice_add" method="POST" enctype="multipart/form-data">
         <input type="text" hidden id='checklist_id' name='checklist_id' value="<?php echo $checklist_id ?>">
         <input type="text" hidden id='topic_qc_id' name='topic_qc_id' value="<?php echo $topic_qc_id ?>">
+        <input type="text" hidden id='qc_id' name='qc_id' value="<?php echo $qc_id ?>">
         <div class="row mb-3">
             <div class="col-12">
                 <label class="font-normal">ชื่อหัวข้อ</label>
@@ -22,7 +24,7 @@ $topic_qc_id = mysqli_real_escape_string($connection, $_POST['topic_qc_id']);
             </div>
         </div>
         <div class="row mb-3">
-        <div class="col-6">
+            <div class="col-6">
                 <label class="font-normal">วิธีการ QC</label>
                 <input type="text" class="form-control" id="" name="description" placeholder="">
             </div>
@@ -33,7 +35,7 @@ $topic_qc_id = mysqli_real_escape_string($connection, $_POST['topic_qc_id']);
         </div>
 
         <div class="row mb-3">
-        <div class="col-6">
+            <div class="col-6">
                 <label class="font-normal">จำนวนครั้ง QC</label>
                 <input type="text" class="form-control" id="" name="description_acceptance" placeholder="">
             </div>
@@ -69,22 +71,22 @@ $topic_qc_id = mysqli_real_escape_string($connection, $_POST['topic_qc_id']);
     $(".select2").select2();
 
     function GetTableChoice() {
-    let checklist_type = $("#checklist_type").val();
-    let checklist_id = $("#checklist_id").val();
-    if (checklist_type == '2') {
-        $("#ShowTable").show();
-        $("#ShowTable").load("ajax/qc_choice/GetTable_choice.php", {
-            checklist_id: checklist_id
-        });
-    } else if (checklist_type == '3') {
-        $("#ShowTable").show();
-        $("#ShowTable").load("ajax/qc_choice/Get_score.php", {
-            checklist_id: checklist_id
-        });
-    } else {
-        $("#ShowTable").hide();
+        let checklist_type = $("#checklist_type").val();
+        let checklist_id = $("#checklist_id").val();
+        if (checklist_type == '2') {
+            $("#ShowTable").show();
+            $("#ShowTable").load("ajax/qc_choice/GetTable_choice.php", {
+                checklist_id: checklist_id
+            });
+        } else if (checklist_type == '3') {
+            $("#ShowTable").show();
+            $("#ShowTable").load("ajax/qc_choice/Get_score.php", {
+                checklist_id: checklist_id
+            });
+        } else {
+            $("#ShowTable").hide();
+        }
     }
-}
 
     function AddChoice() {
         let checklist_id = $("#checklist_id").val();

@@ -32,6 +32,7 @@ $user_id;
                 <div class="col-md-12">
                     <div class="ibox">
                         <div class="ibox-title">
+                            <label for="">เพิ่มคิว</label>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -53,7 +54,8 @@ $user_id;
                                     ?>
                                     <strong>ภาค</strong>
                                     <font color="red">**</font>
-                                    <select name="area_id" id="area_id" style="width: 100%;" class="form-control select2 mb-3 ">
+                                    <select name="area_id" id="area_id" style="width: 100%;"
+                                        class="form-control select2 mb-3 ">
                                         <option value="">กรุณาเลือก</option>
                                         <?php while ($row_area = mysqli_fetch_assoc($res_area)) { ?>
                                             <option value="<?php echo $row_area['area_id'] ?>">
@@ -105,17 +107,59 @@ $user_id;
                             </div>
 
                         </div>
-                    </div>
-                    <div class="ibox-content" id="show_queue">
 
                     </div>
+
                 </div>
 
             </div>
 
-        </div>
-    </form>
 
+    </form>
+    <div class="ibox-title">
+        <div class="row">
+            <div class="col-4 mb-3">
+                <strong>ค้นหาจาก</strong>
+                <font color="red">**</font>
+                <select name="search_type_filter" id="search_type_filter" style="width: 100%;"
+                    class="form-control select2 mb-3 ">
+                    <option value="">กรุณาเลือก </option>
+                    <option value="2">ชื่อลูกค้า/เบอร์โทร </option>
+                    <option value="3">รหัสสาขา/ชื่อสาขา </option>
+                </select>
+            </div>
+
+            <div class="col-4 mb-3">
+                <?php
+                $sql_zone = "SELECT * FROM tbl_zone_oh WHERE active_status = 1";
+                $res_zone = mysqli_query($connection, $sql_zone) or die($connection->error);
+
+                ?>
+                <strong>ภาค</strong>
+                <select name="zone" id="zone" style="width: 100%;" class="form-control select2 mb-3 ">
+
+                    <option value="">กรุณาเลือก</option>
+                    <?php while ($row_zone = mysqli_fetch_assoc($res_zone)) { ?>
+                        <option value="<?php echo $row_zone['area_id'] ?>"><?php echo $row_zone['area_name'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="col-4 mb-3">
+                <strong></strong><br>
+                <div class="input-group">
+                    <input type="text" id="search_filter" name="search_filter" class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" id="" class="btn btn-primary" onclick="GetQueue()"><i
+                                class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="ibox-content" id="show_queue">
+    </div>
+</div>
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -138,12 +182,18 @@ $user_id;
     function GetQueue() {
         var search_type = $('#search_type').val();
         var search_value = $('#search_value').val();
+        var zone = $('#zone').val();
+        var search_type_filter = $('#search_type_filter').val();
+        var search_filter = $('#search_filter').val();
         $.ajax({
             type: "POST",
             url: "ajax/customer_queue/get_queue.php",
             data: {
                 search_type: search_type,
-                search_value: search_value
+                search_value: search_value,
+                zone: zone,
+                search_type_filter: search_type_filter,
+                search_filter: search_filter
             },
             dataType: "html",
             success: function (response) {
@@ -453,20 +503,20 @@ $user_id;
     function Update_Zone() {
         var area_id = $('#area_id').val();
 
-        if (area_id == "") {
-            swal({
-                title: 'กรุณากรอกข้อมูล',
-                text: '',
-                type: 'warning',
-                showConfirmButton: false,
-                timer: 1000
-            }, function () {
-                swal.close()
+        // if (area_id == "") {
+        //     swal({
+        //         title: 'กรุณากรอกข้อมูล',
+        //         text: '',
+        //         type: 'warning',
+        //         showConfirmButton: false,
+        //         timer: 1000
+        //     }, function () {
+        //         swal.close()
 
-            });
+        //     });
 
-            return false;
-        }
+        //     return false;
+        // }
         swal({
             title: "",
             text: "กรุณายืนยันการทำรายการ",

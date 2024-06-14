@@ -77,11 +77,13 @@ $rs_team = mysqli_query($connect_db, $sql_team);
     <h4>2.ข้อมูลสินค้า</h4>
 </strong>
 
+
 <div class="row mb-3 mt-3">
     <div id="product_counter" hidden>0</div>
     <div class="col-12" id="add_product_row" name="add_product_row">
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-12 mb-3">

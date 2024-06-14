@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../../../config/main_function.php");
+include ("../../../config/main_function.php");
 $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 $user_id = $_SESSION['user_id'];
 $job_id = $_POST['job_id'];
@@ -78,19 +78,23 @@ if ($num_pm_group > 0) {
             <?php if ($row['qc_oh_user'] != $user_id) { ?>
                 <div class="row">
                     <div class="col-3 mb-3 text-center">
-                        <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_spare_part('<?php echo $job_id ?>');"> บันทึกอะไหล่ </button>
+                        <button class="btn btn-w-m btn-primary" type="button"
+                            onclick="Modal_spare_part('<?php echo $job_id ?>');"> บันทึกอะไหล่ </button>
                     </div>
 
                     <div class=" col-3 mb-3 text-center">
-                        <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_record_income('<?php echo $job_id ?>');"> บันทึกค่าบริการ </button>
+                        <button class="btn btn-w-m btn-primary" type="button"
+                            onclick="Modal_record_income('<?php echo $job_id ?>');"> บันทึกค่าบริการ </button>
                     </div>
 
                     <div class=" col-3 mb-3 text-center">
-                        <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_record_expend('<?php echo $job_id ?>');"> บันทึกค่าใช้จ่าย </button>
+                        <button class="btn btn-w-m btn-primary" type="button"
+                            onclick="Modal_record_expend('<?php echo $job_id ?>');"> บันทึกค่าใช้จ่าย </button>
                     </div>
 
                     <div class=" col-3 mb-3 text-center">
-                        <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_record_payment('<?php echo $job_id ?>');"> บันทึกการจ่ายเงิน </button>
+                        <button class="btn btn-w-m btn-primary" type="button"
+                            onclick="Modal_record_payment('<?php echo $job_id ?>');"> บันทึกการจ่ายเงิน </button>
                     </div>
 
                     <?php if ($row['job_type'] == 1) { ?>
@@ -118,18 +122,21 @@ if ($num_pm_group > 0) {
 
                     <?php if ($row['job_type'] == 4) { ?>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_expire_date('<?php echo $job_id ?>');"> ประกันเครื่อง </button>
+                            <button class="btn btn-w-m btn-primary" type="button"
+                                onclick="Modal_expire_date('<?php echo $job_id ?>');"> ประกันเครื่อง </button>
                         </div>
                     <?php } ?>
 
                     <?php if ($num_rows == 0) { ?>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-primary" type="button" onclick="Modal_close_record('<?php echo $job_id ?>');"> บันทึกปฏิบัติงาน </button>
+                            <button class="btn btn-w-m btn-primary" type="button"
+                                onclick="Modal_close_record('<?php echo $job_id ?>');"> บันทึกปฏิบัติงาน </button>
                         </div>
                     <?php }
                     if ($num_rows > 1) { ?>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-warning" type="button" onclick="Modal_Editclose_record('<?php echo $job_id ?>');"> แก้ไขปฏิบัติงาน </button>
+                            <button class="btn btn-w-m btn-warning" type="button"
+                                onclick="Modal_Editclose_record('<?php echo $job_id ?>');"> แก้ไขปฏิบัติงาน </button>
                         </div>
                     <?php } ?>
 
@@ -159,11 +166,13 @@ if ($num_pm_group > 0) {
 
                     <?php if ($row['close_user_id'] == NULL) { ?>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-success" type="button" onclick="Modal_close_remark('<?php echo $job_id ?>')"> ปิดงานแบบระบุ </button>
+                            <button class="btn btn-w-m btn-success" type="button"
+                                onclick="Modal_close_remark('<?php echo $job_id ?>')"> ปิดงานแบบระบุ </button>
                         </div>
                     <?php } ?>
                     <div class=" col-3 mb-3 text-center">
-                        <button type="button" class="btn btn-w-m btn-success" onclick="Modal_set_SO('<?php echo $cancel_job_id; ?>','<?php echo $group_type; ?>');"> เลข SO
+                        <button type="button" class="btn btn-w-m btn-success"
+                            onclick="Modal_set_SO('<?php echo $cancel_job_id; ?>','<?php echo $group_type; ?>');"> เลข SO
                         </button>
                     </div>
 
@@ -178,11 +187,13 @@ if ($num_pm_group > 0) {
 
                     <?php if ($row['job_type'] == 6 && $row['quotation_approve_result'] == null) { ?>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-info" type="button" onclick="confirm_approve('<?php echo $job_id ?>',1);">
+                            <button class="btn btn-w-m btn-info" type="button"
+                                onclick="confirm_approve('<?php echo $job_id ?>',1);">
                                 อนุมัติเสนอราคา </button>
                         </div>
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-danger" type="button" onclick="confirm_approve('<?php echo $job_id ?>',0);">
+                            <button class="btn btn-w-m btn-danger" type="button"
+                                onclick="confirm_approve('<?php echo $job_id ?>',0);">
                                 ไม่อนุมัติ </button>
                         </div>
                     <?php } ?>
@@ -196,17 +207,20 @@ if ($num_pm_group > 0) {
                     <?php if ($num_pm_group > 0) { ?>
 
                         <div class=" col-3 mb-3 text-center">
-                            <button class="btn btn-w-m btn-success" type="button" onclick="Modal_group_pm_price('<?php echo $row_pm_group['group_pm_id'] ?>');"> รวมยอดงาน </button>
+                            <button class="btn btn-w-m btn-success" type="button"
+                                onclick="Modal_group_pm_price('<?php echo $row_pm_group['group_pm_id'] ?>');"> รวมยอดงาน </button>
                         </div>
                     <?php } ?>
 
                     <div class=" col-3 mb-3 text-center">
-                        <a href="form_edit_job.php?id=<?php echo $job_id ?>&job_type=<?php echo $row['job_type'] ?>"><button type="button" class="btn btn-w-m btn-warning"> แก้ไข </button></a>
+                        <a href="form_edit_job.php?id=<?php echo $job_id ?>&job_type=<?php echo $row['job_type'] ?>"><button
+                                type="button" class="btn btn-w-m btn-warning"> แก้ไข </button></a>
                     </div>
 
                     <?php if ($row['job_type'] == 4) { ?>
                         <div class="col-3 mb-3 text-center">
-                            <a href="record_sub_oh.php?id=<?php echo $job_id ?>" target="_blank"><button class="btn btn-w-m btn-warning" type="button"> งานย่อย overhaul </button></a>
+                            <a href="record_sub_oh.php?id=<?php echo $job_id ?>" target="_blank"><button
+                                    class="btn btn-w-m btn-warning" type="button"> งานย่อย overhaul </button></a>
                         </div>
                     <?php } ?>
 
@@ -216,7 +230,11 @@ if ($num_pm_group > 0) {
                                     พิมพ์ใบปฏิบัติงาน</button></a> -->
                         </div>
                     <?php } ?>
-
+                    <div class="col-3 mb-3 text-center">
+                        <a href="../../../print/print_peaberey_pm.php?job_id=<?php echo $job_id ?>" target="_blank"><button
+                                type="button" class="btn btn-w-m btn-info ">
+                                พิมพ์</button></a>
+                    </div>
 
                 </div>
             <?php } else { ?>
@@ -234,8 +252,12 @@ if ($num_pm_group > 0) {
                 <div class="col-12 mb-3 text-center">
                     <button class="btn btn-w-m btn-info" type="button" onclick="reset_close('<?php echo $job_id ?>')">
                         รีเซ็ท (IP) </button>
-                    <button type="button" class="btn btn-w-m btn-success" onclick="Modal_set_SO('<?php echo $cancel_job_id; ?>','<?php echo $group_type; ?>');"> เลข SO
+                    <button type="button" class="btn btn-w-m btn-success"
+                        onclick="Modal_set_SO('<?php echo $cancel_job_id; ?>','<?php echo $group_type; ?>');"> เลข SO
                     </button>
+                    <a href="../../../print/print_peaberey_pm.php?job_id=<?php echo $job_id ?>" target="_blank"><button
+                                type="button" class="btn btn-w-m btn-info ">
+                                พิมพ์</button></a>
                 </div>
             </div>
 

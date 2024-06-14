@@ -100,6 +100,7 @@ $row_address = mysqli_fetch_array($rs_address);
 
 ?>
 <div role="tabpanel" id="" class="tab-pane1 active">
+
     <div class="col-lg-12">
         <?php if ($current_user_id == $row['responsible_user_id'] || $admin_status == 9) { ?>
             <div class="row">
@@ -163,6 +164,7 @@ $row_address = mysqli_fetch_array($rs_address);
 
     <div class="ibox">
         <div class="ibox-content">
+
             <?php
 
             $type = "";
@@ -179,6 +181,8 @@ $row_address = mysqli_fetch_array($rs_address);
             } else if ($row['job_type'] == 6) {
                 $type = 'เสนอราคา';
             }
+
+
 
             if ($row['warranty_start_date'] != null) {
                 $warranty_start_date = date('d-m-Y', strtotime($row['warranty_start_date']));
@@ -197,6 +201,7 @@ $row_address = mysqli_fetch_array($rs_address);
             } else {
                 $install_date = "ไม่ระบุ";
             }
+
 
             $today = date("d-m-Y");
             $today_time = strtotime($today);
@@ -389,6 +394,8 @@ $row_address = mysqli_fetch_array($rs_address);
                                 </dd>
                             </div>
                         </dl>
+
+
 
                         <dl class="row mb-0">
                             <div class="col-sm-4 text-sm-left">
