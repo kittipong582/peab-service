@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MyApp\\":"/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6.4"
+        }
+    },
+    "require": {
+        "aws/aws-sdk-php": "^3.232"
+    }
+}

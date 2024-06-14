@@ -1,0 +1,33 @@
+<?php
+include("../../../config/main_function.php");
+
+$connect_db = connectDB("LM=VjfQ{6rsm&/h`");
+
+$zone_id = mysqli_real_escape_string($connect_db, $_POST['zone_id']);
+
+$sql = "SELECT * FROM tbl_zone WHERE zone_id = '$zone_id'";
+$result  = mysqli_query($connect_db, $sql);
+$row = mysqli_fetch_array($result);
+
+
+
+?>
+<form action="" method="post" id="form-edit"  enctype="multipart/form-data">
+    <input type="text" hidden id="zone_id" name="zone_id" value="<?php echo $zone_id; ?>">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขเขต</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <label for="brand_name">
+            ชื่อเขต
+        </label>
+        <input type="text" class="form-control mb-3" id="zone_name" name="zone_name" value="<?php echo $row['zone_name']; ?>">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ปิด</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Update();">บันทึก</button>
+    </div>
+</form>
