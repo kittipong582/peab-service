@@ -10,29 +10,6 @@ $starttime = microtime(true);
 //////////////////////////////////////////////////////////
 
 
-$i = 1;
-foreach ($_POST['PMhours'] as $key => $value) {
-    $temp_array_u[$i]['PMhours'] = $value;
-    $i++;
-}
-
-$i = 1;
-foreach ($_POST['PMminutes'] as $key => $value) {
-    $temp_array_u[$i]['PMminutes'] = $value;
-    $i++;
-}
-
-$i = 1;
-foreach ($_POST['PMhoure'] as $key => $value) {
-    $temp_array_u[$i]['PMhoure'] = $value;
-    $i++;
-}
-
-$i = 1;
-foreach ($_POST['PMminutee'] as $key => $value) {
-    $temp_array_u[$i]['PMminutee'] = $value;
-    $i++;
-}
 
 $i = 1;
 foreach ($_POST['choose_product_id'] as $key => $value) {
@@ -64,6 +41,32 @@ foreach ($_POST['branch_care_id'] as $key => $value) {
 $j = 1;
 foreach ($_POST['responsible_user_id'] as $key => $value) {
     $temp_array_u[$j]['responsible_user_id'] = $value;
+    $j++;
+}
+
+
+
+$j = 1;
+foreach ($_POST['PMhours'] as $key => $value) {
+    $temp_array_u[$j]['PMhours'] = $value;
+    $j++;
+}
+
+$j = 1;
+foreach ($_POST['PMminutes'] as $key => $value) {
+    $temp_array_u[$j]['PMminutes'] = $value;
+    $j++;
+}
+
+$j = 1;
+foreach ($_POST['PMhoure'] as $key => $value) {
+    $temp_array_u[$j]['PMhoure'] = $value;
+    $j++;
+}
+
+$j = 1;
+foreach ($_POST['PMminutee'] as $key => $value) {
+    $temp_array_u[$j]['PMminutee'] = $value;
     $j++;
 }
 
@@ -122,8 +125,6 @@ for ($xx = 1; $xx < $j; $xx++) {
         $branch_care_id = $temp_array_u[$xx]['branch_care_id'];
         $responsible_user_id = $temp_array_u[$xx]['responsible_user_id'];
 
-
-
         /////////////job_no////////////////
         $pre_job_no = "PM";
         $mid_job_no = substr(date("Y") + 543, 2);
@@ -134,10 +135,11 @@ for ($xx = 1; $xx < $j; $xx++) {
             $appointment_date = date("Y-m-d", strtotime($temp_array_u[$xx]['appointment_date']));
             $con_appoint .= ",appointment_date = '$appointment_date'";
         }
-
+        
+        $con_list_pm = "";
         if ($temp_array_u[$xx]['list_pm_job'] != "") {
             $list_pm_job = $temp_array_u[$xx]['list_pm_job'];
-            $con_appoint .= ",list_pm_job = '$list_pm_job'";
+            $con_list_pm .= ",list_pm_job = '$list_pm_job'";
         }
 
         $sql = "INSERT INTO tbl_job
@@ -152,6 +154,7 @@ for ($xx = 1; $xx < $j; $xx++) {
         ,product_id	 ='$product_id'
         ,remark = '$remark'
         $con_appoint
+        $con_list_pm
         ,sub_job_type_id = '$sub_job_type_id'";
         $result_insert  = mysqli_query($connect_db, $sql);
 
@@ -174,10 +177,10 @@ for ($xx = 1; $xx < $j; $xx++) {
             $rs_contact  = mysqli_query($connect_db, $insert_contact);
         }
 
-        $PMhours = $temp_array_u[$a]['PMhours'];
-        $PMminutes = $temp_array_u[$a]['PMminutes'];
-        $PMhoure = $temp_array_u[$a]['PMhoure'];
-        $PMminutee = $temp_array_u[$a]['PMminutee'];
+        $PMhours = $temp_array_u[$xx]['PMhours'];
+        $PMminutes = $temp_array_u[$xx]['PMminutes'];
+        $PMhoure = $temp_array_u[$xx]['PMhoure'];
+        $PMminutee = $temp_array_u[$xx]['PMminutee'];
 
         $sql_update = "UPDATE tbl_job 
             SET appointment_date = '$appointment_date'
@@ -198,6 +201,7 @@ for ($xx = 1; $xx < $j; $xx++) {
         $eh = $PMhoure;
         $em = $PMminutee;
         $time = $eh . $em;
+
         if ($time != "") {
             $appointment_time_end = date("H:i", strtotime($time));
             $sql_update = "UPDATE tbl_job 

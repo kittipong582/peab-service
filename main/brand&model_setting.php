@@ -167,6 +167,7 @@
                 });	
             });
         }
+
         function EditExpend(expend_type_id) {
             $('#myModal').modal('show');
             $('#showModal').load("ajax/settingExpend/FormEdit.php",{ "expend_type_id":expend_type_id },function(){
@@ -241,9 +242,11 @@
                 });	
             });
         }
+        
         function ChangeStatus(my_id, keyname, table) {
             $.post("ajax/ChangeStatus.php", { table_name: table, key_name: keyname, key_value: my_id }, "json");
         }
+
     </script>
     </body>
 </html>

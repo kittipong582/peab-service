@@ -25,9 +25,13 @@ if ($connection) {
         $i++;
     }
 
+    $sql = "SELECT MAX(chl.list_order)  AS Max_listorderFROM `tbl_audit_form` frm 
+        LEFT JOIN tbl_audit_topic topc ON frm.audit_id = topc.audit_id
+        LEFT JOIN tbl_audit_checklist chl ON topc.topic_id = chl.topic_id
+        WHERE frm.audit_id ='$audit_id'
+        ORDER BY topc.list_order ASC , chl.create_datetime ASC;";
 
-
-    $sql = "SELECT MAX(list_order) AS Max_listorder FROM tbl_audit_checklist WHERE topic_id = '$topic_id'";
+    // $sql = "SELECT MAX(list_order) AS Max_listorder FROM tbl_audit_checklist WHERE topic_id = '$topic_id'";
     $res = mysqli_query($connection, $sql);
     $row = mysqli_fetch_assoc($res);
 
@@ -74,9 +78,7 @@ if ($connection) {
 
         }
 
-
         $arr['result'] = 1;
-
 
         if (!$res_insert_score) {
             $arr['result'] = 0;

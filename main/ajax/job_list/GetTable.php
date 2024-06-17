@@ -1054,11 +1054,7 @@ mysqli_close($connect_db);
                     </div>
 
                     <div class="form-group">
-
-
-
                         <?php if ($row['create_user_id'] == $session_id) { ?>
-
                             <button class="btn btn-xs btn-danger " onclick="delete_job('<?php echo $row['job_id']; ?>','<?php echo $row['type']; ?>');">ลบงาน</button>
 
                         <?php } else {
