@@ -94,6 +94,8 @@ for ($xx = 1; $xx < $j; $xx++) {
     // $group_pm_id = $data = mysqli_real_escape_string($connect_db, $_POST['group_pm_id']);
     $group_pm_id = getRandomID(10, 'tbl_group_pm', 'group_pm_id');
 
+    $appointment_date = date("Y-m-d", strtotime($temp_array_u[$xx]['appointment_date']));
+    $arr['appointment_date'] = $appointment_date;
 
     $temp_pm_date = explode('-', $_POST['pm_date']);
     $pm_date = date('Y-m-d', strtotime($temp_pm_date['0'] . "-" . $temp_pm_date['1'] . "-" . $temp_pm_date['2']));
@@ -103,7 +105,6 @@ for ($xx = 1; $xx < $j; $xx++) {
             ,create_user_id = '$create_user_id'
             ,group_pm_id = '$group_pm_id'
         ";
-    $arr['sql_group_pm'] = $sql_group_pm;
     $rs_group_pm = mysqli_query($connect_db, $sql_group_pm);
 
     for ($a = 1; $a < $i; $a++) {
@@ -182,7 +183,7 @@ for ($xx = 1; $xx < $j; $xx++) {
         $PMhoure = $temp_array_u[$xx]['PMhoure'];
         $PMminutee = $temp_array_u[$xx]['PMminutee'];
 
-        $sql_update = "UPDATE tbl_job 
+        $sql_update = "UPDATE tbl_job
             SET appointment_date = '$appointment_date'
             WHERE job_id = '$job_id'";
         $result_update  = mysqli_query($connect_db, $sql_update);
@@ -315,11 +316,9 @@ for ($xx = 1; $xx < $j; $xx++) {
         ";
         $rs_detail = mysqli_query($connect_db, $sql_detail);
 
-
         $sql_line = "SELECT * FROM tbl_user WHERE user_id = '$responsible_user_id';";
         $rs_line  = mysqli_query($connect_db, $sql_line);
         $row_line = mysqli_fetch_array($rs_line);
-
 
         if ($row_line['line_active'] == "1") {
 

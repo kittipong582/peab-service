@@ -10,8 +10,12 @@ if ($connection) {
     $checklist_id = getRandomID2(10, 'tbl_audit_checklist', 'checklist_id');
     $checklist_name = mysqli_real_escape_string($connection, $_POST['checklist_name']);
     $description = mysqli_real_escape_string($connection, $_POST['description']);
-    $data = mysqli_real_escape_string($connection, $_POST['data']);
-    $topic_id  = $_POST['topic_id'];
+    $topic_id = mysqli_real_escape_string($connection, $_POST['topic_id']);
+
+    $sql_au_id = "SELECT * FROM tbl_audit_topic WHERE topic_id = '$topic_id'";
+    $res_au_id = mysqli_query($connection, $sql_au_id) or die($connection->error);
+    $row_au_id = mysqli_fetch_assoc($res_au_id);
+   $audit_id = $row_au_id['audit_id'];
 
     $i = 1;
     foreach ($_POST['score_name'] as $key => $value) {
@@ -25,7 +29,7 @@ if ($connection) {
         $i++;
     }
 
-    $sql = "SELECT MAX(chl.list_order)  AS Max_listorderFROM `tbl_audit_form` frm 
+    $sql = "SELECT MAX(chl.list_order)  AS Max_listorder FROM `tbl_audit_form` frm 
         LEFT JOIN tbl_audit_topic topc ON frm.audit_id = topc.audit_id
         LEFT JOIN tbl_audit_checklist chl ON topc.topic_id = chl.topic_id
         WHERE frm.audit_id ='$audit_id'
@@ -51,6 +55,21 @@ if ($connection) {
     $res_insert = mysqli_query($connection, $sql_insert);
 
     if ($res_insert) {
+
+        $sql = "SELECT chl.checklist_id FROM `tbl_audit_form` frm 
+                LEFT JOIN tbl_audit_topic topc ON frm.audit_id = topc.audit_id
+                LEFT JOIN tbl_audit_checklist chl ON topc.topic_id = chl.topic_id
+                WHERE frm.audit_id ='$audit_id'
+                ORDER BY topc.list_order ASC , chl.create_datetime ASC;";
+        $res = mysqli_query($connection, $sql);
+
+        $list = 1;
+        while ($row = mysqli_fetch_assoc($res)) {
+           $sql_up = "UPDATE tbl_audit_checklist SET list_order = '$list' WHERE checklist_id = '{$row['checklist_id']}'";
+            $res_up = mysqli_query($connection, $sql_up);
+            $list++;
+        }
+
 
         for ($a = 1; $a < $i; $a++) {
             $score_name = $temp_array[$a]['score_name'];
@@ -92,4 +111,3 @@ if ($connection) {
 
 mysqli_close($connection);
 echo json_encode($arr);
-?>

@@ -185,7 +185,8 @@ $checklist_id = $_POST['checklist_id'];
             var checklist_name = $("#checklist_name").val();
             var score_name = $("#score_name").val();
             var score = $("#score").val();
-            console.log(topic_id)
+            
+            
             score_c = 0;
             $(".score_check").map(function (index, elem) {
                 let id = $(this).attr('id');

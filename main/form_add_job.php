@@ -2112,7 +2112,6 @@ $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
 
         var sub_job_type_id = $('#sub_job_type_id').val();
 
-
         var formData = new FormData($("#form_add_job")[0]);
 
         if (job_type == "" || customer_branch_id == "" || contact_name == "" || contact_phone == "" || product_id == "" || sub_job_type_id == "") {
@@ -2163,11 +2162,9 @@ $connect_db = connectDB("LM=VjfQ{6rsm&/h`");
                         document.getElementById("submit").disabled = false;
                         return false;
                     }
-
                 }
             })
         });
-
     }
 
 

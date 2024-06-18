@@ -1041,13 +1041,9 @@ mysqli_close($connect_db);
                 <td class="text-left" style="width: 200px;"><?php echo $row['status'] ?><br>
 
                     <div class="form-group">
-
                         <?php if ($row['row_job_type'] == 2 && $row['button_group'] == 1) { ?>
-
                             <button class="btn btn-xs btn-success " onclick="Group_pm('<?PHP echo $row['job_id'] ?>')">รวมงาน</button>
-
                         <?php } else {
-
                             echo "  ";
                         } ?>
 
