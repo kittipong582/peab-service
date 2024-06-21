@@ -13,7 +13,6 @@ $job = mysqli_real_escape_string($connection, $_POST['job']);
 
 
 
-
 use Aws\S3\S3Client;
 
 // Instantiate an Amazon S3 client.

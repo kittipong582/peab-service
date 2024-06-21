@@ -95,7 +95,6 @@ for ($xx = 1; $xx < $j; $xx++) {
     $group_pm_id = getRandomID(10, 'tbl_group_pm', 'group_pm_id');
 
     $appointment_date = date("Y-m-d", strtotime($temp_array_u[$xx]['appointment_date']));
-    $arr['appointment_date'] = $appointment_date;
 
     $temp_pm_date = explode('-', $_POST['pm_date']);
     $pm_date = date('Y-m-d', strtotime($temp_pm_date['0'] . "-" . $temp_pm_date['1'] . "-" . $temp_pm_date['2']));
@@ -108,7 +107,7 @@ for ($xx = 1; $xx < $j; $xx++) {
     $rs_group_pm = mysqli_query($connect_db, $sql_group_pm);
 
     for ($a = 1; $a < $i; $a++) {
-
+        
         $remark = strip_tags($_POST['note']);
         $job_id = getRandomID(10, 'tbl_job', 'job_id');
         $create_user_id = $_SESSION['user_id'];
